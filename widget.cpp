@@ -1,5 +1,7 @@
 #include "widget.h"
 #include "ui_widget.h"
+#include "admin.h"
+#include "decane.h"
 #include <QtSql/QSqlDatabase>
 #include<qDebug>
 #include<QSqlQuery>
@@ -41,10 +43,10 @@ void Widget::on_pushButton_clicked()
 
                 QString login = ui->lineEdit->text();
                 QString parol= ui->lineEdit_2->text();
-                QString gr;
+
 
                 QSqlQuery query;
-                QString e = QString("SELECT * FROM auth WHERE \"login\" = '%1'").arg(login);
+                QString e = QString("SELECT * FROM \"Users\" WHERE login = '%1'").arg(login);
                 query.exec(e);
                 qDebug()<<query.value(0);
                 if(!query.isActive())
@@ -54,13 +56,30 @@ void Widget::on_pushButton_clicked()
                 while (query.next()) {
                  IDD =query.value(0).toString();
                  FIO = query.value(1).toString();
-                 log = query.value(2).toString();
-                 ps = query.value(3).toString();
-                 gr = query.value(4).toString();
-                 ut=query.value(5).toString();
+                 ut = query.value(2).toString();
+                 log = query.value(3).toString();
+                 ps = query.value(4).toString();
                 }
 
+                if (login == log && parol == ps && ut =="1")
+                {
+                    Decane *w22 = new Decane();
+                    w22->setWindowTitle("Окно работы Декана");
+                    w22->show();
+                    close();
 
+
+                 }
+               else if (login == log && parol == ps && ut =="2")
+                {
+                    Admin *w2 = new Admin();
+                     w2->setWindowTitle("Окно работы Админа");
+                     w2->show();
+                     close();
+
+                 }
+
+                else QMessageBox::information(this, "Ошибка!", "Неверный логин или пароль!");
 
 
 

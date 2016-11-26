@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 {
     sdb.setHostName("192.168.1.40");
                     sdb.setPort(5432);
-                    sdb.setDatabaseName("MarkovaDB");
+                    sdb.setDatabaseName("IS-AOOZ");
                     sdb.setUserName("postgres");
                     sdb.setPassword("postgres");
                     ok = sdb.open();

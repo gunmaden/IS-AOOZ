@@ -14,8 +14,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        widget.cpp
+        widget.cpp \
+    decane.cpp \
+    admin.cpp
 
-HEADERS  += widget.h
+HEADERS  += widget.h \
+    decane.h \
+    admin.h
 
-FORMS    += widget.ui
+FORMS    += widget.ui \
+    decane.ui \
+    admin.ui
