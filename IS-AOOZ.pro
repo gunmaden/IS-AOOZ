@@ -16,12 +16,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         widget.cpp \
     decane.cpp \
-    admin.cpp
+    admin.cpp \
+    klaster.cpp
 
 HEADERS  += widget.h \
     decane.h \
-    admin.h
+    admin.h \
+    klaster.h
 
 FORMS    += widget.ui \
     decane.ui \
-    admin.ui
+    admin.ui \
+    klaster.ui
