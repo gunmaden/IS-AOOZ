@@ -21,6 +21,8 @@ SOURCES += main.cpp\
     admin_addus.cpp \
     admin_delus.cpp \
     adminbd.cpp
+    klaster.cpp
+
 
 HEADERS  += widget.h \
     decane.h \
@@ -29,6 +31,8 @@ HEADERS  += widget.h \
     admin_addus.h \
     admin_delus.h \
     adminbd.h
+    klaster.h
+
 
 FORMS    += widget.ui \
     decane.ui \
@@ -37,3 +41,4 @@ FORMS    += widget.ui \
     admin_addus.ui \
     admin_delus.ui \
     adminbd.ui
+    klaster.ui
