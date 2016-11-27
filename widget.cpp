@@ -2,14 +2,14 @@
 #include "ui_widget.h"
 #include "admin.h"
 #include "decane.h"
-#include <QtSql/QSqlDatabase>
-#include<qDebug>
-#include<QSqlQuery>
+#include <QSqlDatabase>
+#include <qDebug>
+#include <QSqlQuery>
 #include <QVariant>
-#include<QList>
-#include<QMessageBox>
+#include <QList>
+#include <QMessageBox>
 #include <QSqlRecord>
-#include<QSqlQueryModel>
+#include <QSqlQueryModel>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -60,7 +60,7 @@ void Widget::on_pushButton_clicked()
                  log = query.value(3).toString();
                  ps = query.value(4).toString();
                 }
-
+                qDebug()<<FIO;
                 if (login == log && parol == ps && ut =="1")
                 {
                     Decane *w22 = new Decane();
