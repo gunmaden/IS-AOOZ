@@ -1,14 +1,12 @@
 SELECT DISTINCT
-  tes."testName",
-  string_agg(DISTINCT task."studGroupName", ',')
+  task."studGroupName",
+  tes."testName"
 FROM "Task" AS task
   INNER JOIN "Test" tes ON tes."testID" = task."testID"
 WHERE task."studGroupName" IN (SELECT stg."studGroupName"
                                FROM "StudGroup" stg, "Decane" d
                                WHERE (d."facultyName" = stg."facultyName" AND
-                                      d."decaneName" = 'Козлов Вячеслав Васильевич'))
-GROUP BY tes."testName";
-
+                                      d."decaneName" = 'Козлов Вячеслав Васильевич'));
 
 SELECT count(*) FROM (SELECT DISTINCT task."studGroupName", tes."testName", RANK() OVER(ORDER BY "testName") rnk
 FROM "Task" AS task
@@ -33,13 +31,11 @@ WITH q AS (SELECT DISTINCT
 
 SELECT
   q."studGroupName",
-  string_agg(q."testName", ','),
-  count(SELECT * FROM q where q."testName"=q."testName")
+  q."testName"
 FROM q
 WHERE q."testName" IN ((SELECT DISTINCT q."testName"
                        FROM q
-                       WHERE q."studGroupName" IN ('ГИП-110')))
-GROUP BY q."studGroupName";
+                       WHERE q."studGroupName" IN ('ГИП-110')));
 
 
 
@@ -62,7 +58,7 @@ SELECT ttt."testName", string_agg(ttt."studGroupName",',') FROM (
 SELECT DISTINCT task."studGroupName", tes."testName"
 FROM "Task" AS task
 INNER JOIN "Test" tes ON tes."testID" = task."testID"
-WHERE task."studGroupName" IN ('ГИП-115а', 'ГИП-115б', 'ГИП-110')
+WHERE task."studGroupName" IN ('ГИП-115а', 'ГИП-115б', 'ГИП-110', 'ГИП-109', 'ГИП-114')
 GROUP BY task."studGroupName", tes."testName") as ttt
 GROUP BY ttt."testName";
 
