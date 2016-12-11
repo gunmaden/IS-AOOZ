@@ -33,7 +33,7 @@
      <item>
       <widget class="QPushButton" name="pushButton_3">
        <property name="text">
-        <string>Инициализация вводаинформации</string>
+        <string>Инициализация ввода информации</string>
        </property>
       </widget>
      </item>

@@ -17,17 +17,34 @@ SOURCES += main.cpp\
         widget.cpp \
     decane.cpp \
     admin.cpp \
-    klaster.cpp \
     prepare.cpp
+    admin_users.cpp \
+    admin_addus.cpp \
+    admin_delus.cpp \
+    adminbd.cpp \
+    klaster.cpp \
+    spravka.cpp
+
 
 HEADERS  += widget.h \
     decane.h \
     admin.h \
     klaster.h \
     prepare.h
+    admin_users.h \
+    admin_addus.h \
+    admin_delus.h \
+    adminbd.h \
+    spravka.h
+
 
 FORMS    += widget.ui \
     decane.ui \
     admin.ui \
-    klaster.ui \
     prepare.ui
+    admin_users.ui \
+    admin_addus.ui \
+    admin_delus.ui \
+    adminbd.ui \
+    klaster.ui \
+    spravka.ui
