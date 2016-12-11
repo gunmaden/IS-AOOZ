@@ -4,7 +4,7 @@
 #include <QWidget>
 
 extern QStringList groups;
-extern QStringList students;
+extern QStringList disciples;
 
 namespace Ui {
 class prepare;
@@ -20,6 +20,11 @@ public:
 
 private:
     Ui::prepare *ui;
+    void fillTable(QList<QStringList> lst);
+    void prepareTable(QStringList students, QList<QStringList> studResults);
+    QStringList getStudents();
+    QList<QStringList> getMarks(QStringList students);
+    void fillGroupBox();
 };
 
 #endif // PREPARE_H

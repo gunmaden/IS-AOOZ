@@ -71,7 +71,6 @@ void klaster::test(){
         if (after.at(i)->checkState()==Qt::Checked)
         {list.append("'"+after.at(i)->text()+"'");}
     }
-
     s = list.join("),(");
     QString group_sel = QString("SELECT DISTINCT"
                                 " task.\"studGroupName\", "
@@ -141,10 +140,26 @@ void klaster::test(){
 }
 
 QStringList groups;
-QStringList students;
+QStringList disciples;
+
+void clearstlst(QStringList lst){
+    if (lst.count()!=0)
+        lst.clear();
+}
 
 void klaster::on_pushButton_clicked()
 {
+
+    clearstlst(groups);
+    clearstlst(disciples);
+    foreach (QCheckBox *box, ui->groupBox->findChildren<QCheckBox *>()) {
+        if (box->checkState()==Qt::Checked)
+            groups.append(box->text());
+    }
+    foreach (QCheckBox *box, ui->groupBox_2->findChildren<QCheckBox *>()) {
+        if (box->checkState()==Qt::Checked)
+            disciples.append(box->text());
+    }
     prepare *p = new prepare();
     p->show();
     close();
