@@ -15,6 +15,9 @@ public:
     explicit AdminBD(QWidget *parent = 0);
     ~AdminBD();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::AdminBD *ui;
 };

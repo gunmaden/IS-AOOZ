@@ -17,6 +17,7 @@ Admin_delus::Admin_delus(QWidget *parent) :
     ui(new Ui::Admin_delus)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Удаление пользователей");
     userFIO.clear();
     userId.clear();
     ui->comboBox->clear();
@@ -53,7 +54,6 @@ void Admin_delus::on_pushButton_clicked()
           QMessageBox::information(this, "Успешно!", "Пользователь был успешно удален");
 
           Admin_users *w2 = new Admin_users();
-          w2->setWindowTitle("Ведение справочника пользователей");
           w2->show();
           close();
       }
@@ -63,7 +63,6 @@ void Admin_delus::on_pushButton_clicked()
 void Admin_delus::on_pushButton_2_clicked()
 {
     Admin_users *w2 = new Admin_users();
-    w2->setWindowTitle("Ведение справочника пользователей");
     w2->show();
     close();
 }

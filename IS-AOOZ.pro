@@ -20,8 +20,9 @@ SOURCES += main.cpp\
     admin_users.cpp \
     admin_addus.cpp \
     admin_delus.cpp \
-    adminbd.cpp
-    klaster.cpp
+    adminbd.cpp \
+    klaster.cpp \
+    spravka.cpp
 
 
 HEADERS  += widget.h \
@@ -30,8 +31,9 @@ HEADERS  += widget.h \
     admin_users.h \
     admin_addus.h \
     admin_delus.h \
-    adminbd.h
-    klaster.h
+    adminbd.h \
+    klaster.h \
+    spravka.h
 
 
 FORMS    += widget.ui \
@@ -40,5 +42,6 @@ FORMS    += widget.ui \
     admin_users.ui \
     admin_addus.ui \
     admin_delus.ui \
-    adminbd.ui
-    klaster.ui
+    adminbd.ui \
+    klaster.ui \
+    spravka.ui

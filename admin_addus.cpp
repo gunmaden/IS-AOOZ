@@ -17,6 +17,7 @@ Admin_addus::Admin_addus(QWidget *parent) :
     ui(new Ui::Admin_addus)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Добавление пользователей");
     QRegExp fio("^[а-яА-ЯёЁa-zA-Z \.]+$");
     QRegExp rx("^[а-яА-ЯёЁa-zA-Z0-9]+$");
     QValidator *validator = new QRegExpValidator(rx, this);
@@ -82,7 +83,6 @@ void Admin_addus::on_pushButton_clicked(){
 
 
         Admin_users *w2 = new Admin_users();
-        w2->setWindowTitle("Ведение справочника пользователей");
         w2->show();
         close();
     }
@@ -105,7 +105,6 @@ void Admin_addus::on_pushButton_clicked(){
 void Admin_addus::on_pushButton_2_clicked()
 {
     Admin_users *w2 = new Admin_users();
-    w2->setWindowTitle("Ведение справочника пользователей");
     w2->show();
     close();
 }
