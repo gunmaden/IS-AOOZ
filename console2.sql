@@ -20,19 +20,21 @@ SELECT DISTINCT t."studGroupName"
 WITH q AS (SELECT DISTINCT
              task."studGroupName",
              tes."testName"
-           FROM "Task" AS task, "Test" tes WHERE tes."testID" = task."testID" and
-           task."studGroupName" IN (SELECT stg."studGroupName"
+           FROM "Task" AS task, "Test" tes
+           WHERE tes."testID" = task."testID" AND
+                 task."studGroupName" IN (SELECT stg."studGroupName"
                                           FROM "StudGroup" stg, "Decane" d
                                           WHERE (d."facultyName" = stg."facultyName" AND
                                                  d."decaneName" = 'Козлов Вячеслав Васильевич'))
            GROUP BY task."studGroupName", tes."testName"),
-  count_filters as (SELECT count(*) as count_fil FROM (VALUES (0),(1),(2))  as count_fil(q1)),
-  filters_group as (SELECT * FROM (VALUES ('ГИП-115б'),('ГИП-114'),('ГИП-115а')) as gr_fil(gr_fil))
-SELECT
---   q."studGroupName",
-  q."testName"
+    count_filters AS (SELECT 3 cof),
+    filters_group AS (SELECT *
+                      FROM (VALUES ('ГИП-113'), ('ГИП-114'), ('ГИП-115а')) AS gr_fil(gr_fil))
+SELECT q."testName"
 FROM q, filters_group, count_filters
-WHERE q."studGroupName" in (filters_group.gr_fil)
-GROUP BY q."testName", count_fil
-HAVING count(q."studGroupName")=count_filters.count_fil;
+WHERE q."studGroupName" IN (filters_group.gr_fil)
+GROUP BY q."testName", cof
+HAVING count(q."studGroupName") = count_filters.cof;
 
+SELECT *
+                      FROM (VALUES ('ГИП-113'), ('ГИП-114'), ('ГИП-115а')) AS gr_fil(gr_fil)

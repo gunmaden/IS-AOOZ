@@ -17,14 +17,17 @@ SOURCES += main.cpp\
         widget.cpp \
     decane.cpp \
     admin.cpp \
-    klaster.cpp
+    klaster.cpp \
+    prepare.cpp
 
 HEADERS  += widget.h \
     decane.h \
     admin.h \
-    klaster.h
+    klaster.h \
+    prepare.h
 
 FORMS    += widget.ui \
     decane.ui \
     admin.ui \
-    klaster.ui
+    klaster.ui \
+    prepare.ui

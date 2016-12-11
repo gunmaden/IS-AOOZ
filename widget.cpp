@@ -16,6 +16,7 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Авторизация");
 }
 
 Widget::~Widget()
@@ -64,7 +65,6 @@ void Widget::on_pushButton_clicked()
                 if (login == log && parol == ps && ut =="1")
                 {
                     Decane *w22 = new Decane();
-                    w22->setWindowTitle("Окно работы Декана");
                     w22->show();
                     close();
 

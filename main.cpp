@@ -30,14 +30,8 @@ int main(int argc, char *argv[])
                         qDebug() << "Ошибка подключения к базе данных!";
                         return -1;
                     }
-
     QApplication a(argc, argv);
     Widget w;
-    w.setWindowTitle("Авторизация");
-
-
-
     w.show();
-
     return a.exec();
 }

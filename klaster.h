@@ -25,9 +25,15 @@ public slots:
 
 //private slots:
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_toolButton_clicked();
+
 private:
     Ui::klaster *ui;
 
+    void clear_labels();
 };
 
 #endif // KLASTER_H
