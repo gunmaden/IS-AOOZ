@@ -107,8 +107,8 @@ void prepare::fillTable(QList<QStringList> lst){
 
 void prepare::fillGroupBox(){
     QList<QLabel *> labels = ui->groupBox->findChildren<QLabel *>();
-    labels.at(0)->setText(QString("Выбранные группы: %1").arg(groups.join(', ')));
-    labels.at(1)->setText(QString("Выбранные дисциплины: %1").arg(disciples.join(',')));
+    labels.at(0)->setText(QString("Выбранные группы: %1").arg(groups.join(", ")));
+    labels.at(1)->setText(QString("Выбранные дисциплины: %1").arg(disciples.join(", ")));
     labels.at(2)->setText(QString("Количество студентов: %1").arg(getStudents().count()));
 }
 
