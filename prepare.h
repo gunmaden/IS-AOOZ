@@ -18,6 +18,11 @@ public:
     explicit prepare(QWidget *parent = 0);
     ~prepare();
 
+private slots:
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::prepare *ui;
     void fillTable(QList<QStringList> lst);

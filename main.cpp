@@ -19,7 +19,7 @@ QSqlDatabase sdb = QSqlDatabase::addDatabase("QPSQL");
 
 int main(int argc, char *argv[])
 {
-    sdb.setHostName("localhost");
+    sdb.setHostName("192.168.1.40");
                     sdb.setPort(5432);
                     sdb.setDatabaseName("IS-AOOZ");
                     sdb.setUserName("postgres");
