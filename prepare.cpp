@@ -21,22 +21,18 @@
 #include <QScatterSeries>
 #include <QMainWindow>
 QT_CHARTS_USE_NAMESPACE
-//template<typename T>
-//void f(T s)
-//{
-//    qDebug()<<s;
-//}
 
-prepare::prepare(QWidget *parent) :
+int clastersCount;
+prepare::prepare(QWidget *parent, int clasterCount) :
     QWidget(parent),
     ui(new Ui::prepare)
 {
     ui->setupUi(this);
+    clastersCount=clasterCount;
     this->setWindowIcon(QIcon(":/favicon.ico"));
     ui->tableWidget->clear();
     this->setWindowTitle("Подготовка к кластеризации");
     QStringList students = getStudents();
-//    f(students);
     QList <QStringList> studResults = getMarks(students);
     prepareTable(students,studResults);
     fillGroupBox();
@@ -104,7 +100,6 @@ void prepare::fillTable(QList<QStringList> lst){
         foreach (QString v, l) {
             QTableWidgetItem *it = new QTableWidgetItem(v);
             ui->tableWidget->setItem(row,column,it);
-//            f(v);
             row++;
         }
         column++;
@@ -276,12 +271,6 @@ QList <QList <int> >  clasterize(QList <QList <double> > rawData, int clastersCo
 
 QList <QList <int> > resulter(QList<QList <double> > rawData, int clastersCount)
 {
-//    QList <double> lst;
-//    lst<<87<<12<<11<<67<<2<<30<<91<<45<<97<<64;
-//    s.append(lst);
-//    lst.clear();
-//    lst<<60<<55<<92<<26<<11<<87<<37<<78<<78<<86;
-//    s.append(lst);
     QList <QList <int> > finalResult = clasterize(rawData,clastersCount);
     return finalResult;
 }
@@ -347,7 +336,6 @@ void prepare::on_pushButton_2_clicked()
         bool flag = false;
         for (int col=0;col<ui->tableWidget->columnCount();col++)
         {
-//            qDebug()<<ui->tableWidget->item(row,col)->text().toDouble();
             if (ui->tableWidget->item(row,col)->text().toDouble() != 0)
             {
                 flag = true;
@@ -356,7 +344,6 @@ void prepare::on_pushButton_2_clicked()
         }
         if (flag==false)
         {
-//            qDebug()<<"FUCK"<<fios;
             indexesForDelete.append(fios);
         }
         else {
@@ -396,7 +383,7 @@ void prepare::on_pushButton_2_clicked()
         }
         marks<<marksCols;
     }
-   QList <QList <int> > clastersMatrix = resulter(marks,4);
+   QList <QList <int> > clastersMatrix = resulter(marks,clastersCount);
    prepareChart(clastersMatrix,marks);
 }
 

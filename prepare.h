@@ -15,7 +15,7 @@ class prepare : public QWidget
     Q_OBJECT
 
 public:
-    explicit prepare(QWidget *parent = 0);
+    explicit prepare(QWidget *parent = 0, int clasterCount=2);
     ~prepare();
 
 private slots:

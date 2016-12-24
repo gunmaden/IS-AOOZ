@@ -21,9 +21,8 @@ public:
     ~klaster();
 
 public slots:
-    void test();
-
-//private slots:
+    void fillDisciples();
+    void limitDisciples();
 
 private slots:
     void on_pushButton_clicked();

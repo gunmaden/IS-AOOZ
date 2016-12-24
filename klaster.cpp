@@ -40,12 +40,12 @@ klaster::klaster(QWidget *parent) :
     while ( query.next() ){
         QCheckBox * box = new QCheckBox(query.value(0).toString());
         box->setChecked(false);
-        connect(box,SIGNAL(toggled(bool)),this,SLOT(test()));
+        connect(box,SIGNAL(toggled(bool)),this,SLOT(fillDisciples()));
         l->addWidget(box);
     }
     ui->groupBox->setLayout(l);
     lest = ui->groupBox->findChildren<QCheckBox *>();
-    test();
+    fillDisciples();
 }
 
 klaster::~klaster()
@@ -60,8 +60,30 @@ void klaster::clear_labels(){
     }
 }
 
-void klaster::test(){
-    //    qDebug()<<"???";
+void klaster::limitDisciples(){
+    int counter=0;
+    QList<QCheckBox *> after;
+
+    after = ui->groupBox_2->findChildren<QCheckBox *>();
+    foreach (QCheckBox *box, after) {
+        if (box->checkState()==Qt::Checked)
+            counter++;
+        if (counter>=2)
+                break;
+    }
+    if (counter>=2)
+        foreach (QCheckBox *box, after) {
+            if (box->checkState()!=Qt::Checked)
+                box->setDisabled(true);
+        }
+    else {
+        foreach (QCheckBox *box, after) {
+            box->setDisabled(false);
+        }
+    }
+}
+
+void klaster::fillDisciples(){
     QList<QCheckBox *> diff;
     QList<QCheckBox *> after;
 
@@ -116,11 +138,11 @@ void klaster::test(){
         QCheckBox * box = new QCheckBox(query.value(0).toString());
         box->setChecked(false);
         ui->groupBox_2->layout()->addWidget(box);
-
+        connect(box,SIGNAL(toggled(bool)),this,SLOT(limitDisciples()));
         counter++;
     }
 
-    f(QString("Counter: %1").arg(counter));
+    //    f(QString("Counter: %1").arg(counter));
 
     if (counter == 0)
     {
@@ -161,7 +183,8 @@ void klaster::on_pushButton_clicked()
         if (box->checkState()==Qt::Checked)
             disciples.append(box->text());
     }
-    prepare *p = new prepare();
+    int clasters = ui->spinBox->value();
+    prepare *p = new prepare(0,clasters);
     p->show();
     close();
 }
