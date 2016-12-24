@@ -16,6 +16,7 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
     this->setWindowTitle("Авторизация");
 }
 

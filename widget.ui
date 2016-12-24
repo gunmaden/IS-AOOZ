@@ -156,5 +156,22 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>lineEdit_2</sender>
+   <signal>returnPressed()</signal>
+   <receiver>pushButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>185</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>172</x>
+     <y>264</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

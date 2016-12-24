@@ -49,3 +49,6 @@ FORMS    += widget.ui \
     adminbd.ui \
     klaster.ui \
     spravka.ui
+
+RESOURCES += \
+    resource.qrc

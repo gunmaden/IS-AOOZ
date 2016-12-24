@@ -32,6 +32,7 @@ prepare::prepare(QWidget *parent) :
     ui(new Ui::prepare)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
     ui->tableWidget->clear();
     this->setWindowTitle("Подготовка к кластеризации");
     QStringList students = getStudents();
@@ -326,6 +327,7 @@ void prepareChart(QList <QList <int> > clastersMatrix, QList <QList <double> > m
     qDebug()<<"Chart: "<<chart->maximumHeight()<<chart->maximumSize()<<chart->maximumWidth();
     qDebug()<<"ChartView: "<<chartView->maximumHeight()<<chartView->maximumSize()<<chartView->maximumWidth();
     QMainWindow *w = new QMainWindow();
+    w->setWindowIcon(QIcon(":/favicon.ico"));
     w->setCentralWidget(chartView);
     w->show();
 }
@@ -400,6 +402,8 @@ void prepare::on_pushButton_2_clicked()
 
 void prepare::on_pushButton_clicked()
 {
+ groups.clear();
+ disciples.clear();
  klaster *k = new klaster();
  k->show();
  close();

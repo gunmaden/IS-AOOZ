@@ -54,3 +54,5 @@ FROM "Task" t
   JOIN "Test" tes ON t."testID" = tes."testID"
 WHERE t."studName" = 'Андреев Николай Валерьевич'
 GROUP BY tes."testName"
+
+SELECT avg(t."taskMark100") FROM "Task" t WHERE "studName"='Дергунова Екатерина Евгеньевна'

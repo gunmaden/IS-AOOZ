@@ -7,6 +7,7 @@ Spravka::Spravka(QWidget *parent) :
     ui(new Ui::Spravka)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
     this->setWindowTitle("Справка");
 }
 

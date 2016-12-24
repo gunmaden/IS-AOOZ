@@ -28,6 +28,7 @@ klaster::klaster(QWidget *parent) :
     ui(new Ui::klaster)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
     this->setWindowTitle("Настройка кластеризации");
     QString s = QString(" SELECT DISTINCT t.\"studGroupName\" "
                         " FROM \"Task\" t "

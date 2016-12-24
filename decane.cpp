@@ -7,6 +7,7 @@ Decane::Decane(QWidget *parent) :
     ui(new Ui::Decane)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
     this->setWindowTitle("Окно работы Декана");
 }
 
