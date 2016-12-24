@@ -7,6 +7,8 @@ Decane::Decane(QWidget *parent) :
     ui(new Ui::Decane)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
+    this->setWindowTitle("Окно работы Декана");
 }
 
 Decane::~Decane()
@@ -22,7 +24,6 @@ void Decane::on_pushButton_5_clicked()
 void Decane::on_pushButton_clicked()
 {
     klaster *k = new klaster();
-    k->setWindowTitle("Настройка кластеризации");
     k->show();
     close();
 }

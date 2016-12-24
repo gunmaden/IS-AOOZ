@@ -11,6 +11,7 @@ Admin::Admin(QWidget *parent) :
     ui(new Ui::Admin)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
     this->setWindowTitle("Окно работы Администратора");
 }
 

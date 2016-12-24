@@ -11,6 +11,7 @@ Admin_users::Admin_users(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Ведение справочника пользователей");
+    this->setWindowIcon(QIcon(":/favicon.ico"));
 
     QSqlQueryModel *model = new QSqlQueryModel;
     model->setQuery("SELECT * FROM \"Users\"");

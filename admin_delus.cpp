@@ -18,6 +18,7 @@ Admin_delus::Admin_delus(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Удаление пользователей");
+    this->setWindowIcon(QIcon(":/favicon.ico"));
     userFIO.clear();
     userId.clear();
     ui->comboBox->clear();

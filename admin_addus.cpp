@@ -17,6 +17,7 @@ Admin_addus::Admin_addus(QWidget *parent) :
     ui(new Ui::Admin_addus)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
     this->setWindowTitle("Добавление пользователей");
     QRegExp fio("^[а-яА-ЯёЁa-zA-Z \.]+$");
     QRegExp rx("^[а-яА-ЯёЁa-zA-Z0-9]+$");

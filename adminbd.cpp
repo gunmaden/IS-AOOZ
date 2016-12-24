@@ -9,6 +9,7 @@ AdminBD::AdminBD(QWidget *parent) :
     ui(new Ui::AdminBD)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
     this->setWindowTitle("Просмотр локальной БД");
     QSqlQueryModel *model = new QSqlQueryModel;
     model->setQuery("SELECT * FROM \"Stud\"");
