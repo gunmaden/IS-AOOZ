@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     admin_delus.cpp \
     adminbd.cpp \
     klaster.cpp \
-    spravka.cpp
+    spravka.cpp \
+    dynamic.cpp
 
 
 HEADERS  += widget.h \
@@ -36,7 +37,8 @@ HEADERS  += widget.h \
     admin_addus.h \
     admin_delus.h \
     adminbd.h \
-    spravka.h
+    spravka.h \
+    dynamic.h
 
 
 FORMS    += widget.ui \
@@ -48,7 +50,8 @@ FORMS    += widget.ui \
     admin_delus.ui \
     adminbd.ui \
     klaster.ui \
-    spravka.ui
+    spravka.ui \
+    dynamic.ui
 
 RESOURCES += \
     resource.qrc

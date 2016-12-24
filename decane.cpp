@@ -1,5 +1,6 @@
 #include "decane.h"
 #include "ui_decane.h"
+#include "dynamic.h"
 #include "klaster.h"
 
 Decane::Decane(QWidget *parent) :
@@ -25,5 +26,12 @@ void Decane::on_pushButton_clicked()
 {
     klaster *k = new klaster();
     k->show();
+    close();
+}
+
+void Decane::on_pushButton_2_clicked()
+{
+    dynamic *d = new dynamic();
+    d->show();
     close();
 }
