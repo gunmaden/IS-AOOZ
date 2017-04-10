@@ -15,6 +15,11 @@ public:
     explicit ZavCath(QWidget *parent = 0);
     ~ZavCath();
 
+private slots:
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::ZavCath *ui;
 };

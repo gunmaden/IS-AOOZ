@@ -27,7 +27,10 @@ SOURCES += main.cpp\
     spravka.cpp \
     dynamic.cpp \
     zavcath.cpp \
-    analiz.cpp
+    analiz.cpp \
+    analyzeres.cpp \
+    variety.cpp \
+    ds.cpp
 
 
 HEADERS  += widget.h \
@@ -42,7 +45,10 @@ HEADERS  += widget.h \
     spravka.h \
     dynamic.h \
     zavcath.h \
-    analiz.h
+    analiz.h \
+    analyzeres.h \
+    vairiety.h \
+    ds.h
 
 
 FORMS    += widget.ui \
@@ -57,7 +63,10 @@ FORMS    += widget.ui \
     spravka.ui \
     dynamic.ui \
     zavcath.ui \
-    analiz.ui
+    analiz.ui \
+    analyzeres.ui \
+    vairiety.ui \
+    ds.ui
 
 RESOURCES += \
     resource.qrc
