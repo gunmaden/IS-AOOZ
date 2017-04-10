@@ -13,7 +13,7 @@
 #include <QButtonGroup>
 #include <QSqlQueryModel>
 #include <QList>
-#include <QSqltablemodel>
+#include <QSqlTableModel>
 
 QList<QCheckBox *> lest;
 

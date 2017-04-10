@@ -2,8 +2,9 @@
 #include "ui_widget.h"
 #include "admin.h"
 #include "decane.h"
+#include "zavcath.h"
 #include <QSqlDatabase>
-#include <qDebug>
+#include <QDebug>
 #include <QSqlQuery>
 #include <QVariant>
 #include <QList>
@@ -63,15 +64,14 @@ void Widget::on_pushButton_clicked()
                  ps = query.value(4).toString();
                 }
                 qDebug()<<FIO;
+
                 if (login == log && parol == ps && ut =="1")
                 {
                     Decane *w22 = new Decane();
                     w22->show();
                     close();
-
-
                  }
-               else if (login == log && parol == ps && ut =="2")
+                else if (login == log && parol == ps && ut =="2")
                 {
                     Admin *w2 = new Admin();
                      w2->setWindowTitle("Окно работы Админа");
@@ -79,10 +79,12 @@ void Widget::on_pushButton_clicked()
                      close();
 
                  }
-
+                else if (login == log && parol == ps && ut =="3")
+                {
+                    ZavCath *zc = new ZavCath();
+                    zc->setWindowTitle("Окно работы зав. кафедрой");
+                    zc->show();
+                    close();
+                }
                 else QMessageBox::information(this, "Ошибка!", "Неверный логин или пароль!");
-
-
-
-
 }

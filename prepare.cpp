@@ -1,7 +1,8 @@
 #include "prepare.h"
 #include "ui_prepare.h"
 #include "klaster.h"
-#include <qDebug>
+#include <QtMath>
+#include <QDebug>
 #include <QSqlDatabase>
 #include <QDebug>
 #include <QChart>
@@ -17,7 +18,7 @@
 #include <QSqlQueryModel>
 #include <QList>
 #include <QStringList>
-#include <QSqltablemodel>
+#include <QSqlTableModel>
 #include <QScatterSeries>
 #include <QMainWindow>
 QT_CHARTS_USE_NAMESPACE
