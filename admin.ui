@@ -18,6 +18,22 @@
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QPushButton" name="pushButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+     background-color: rgb(190, 255, 255);
+     border-style: outset;
+     border-width: 2px;
+     border-radius: 10px;
+     border-color: black;
+     font: bold 14px;
+     min-width: 10em;
+     padding: 6px;
+ }
+ QPushButton:pressed {
+     background-color: rgb(0, 255, 238);
+     border-style: inset;
+ }</string>
+       </property>
        <property name="text">
         <string>Ведение справочника пользователей</string>
        </property>
@@ -25,6 +41,22 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_2">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+     background-color: rgb(190, 255, 255);
+     border-style: outset;
+     border-width: 2px;
+     border-radius: 10px;
+     border-color: black;
+     font: bold 14px;
+     min-width: 10em;
+     padding: 6px;
+ }
+ QPushButton:pressed {
+     background-color: rgb(0, 255, 238);
+     border-style: inset;
+ }</string>
+       </property>
        <property name="text">
         <string>Просмотр локальной БД</string>
        </property>
@@ -32,6 +64,22 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_3">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+     background-color: rgb(190, 255, 255);
+     border-style: outset;
+     border-width: 2px;
+     border-radius: 10px;
+     border-color: black;
+     font: bold 14px;
+     min-width: 10em;
+     padding: 6px;
+ }
+ QPushButton:pressed {
+     background-color: rgb(0, 255, 238);
+     border-style: inset;
+ }</string>
+       </property>
        <property name="text">
         <string>Инициализация ввода информации</string>
        </property>
@@ -43,6 +91,22 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="pushButton_4">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+     background-color: rgb(255, 245, 133);
+     border-style: outset;
+     border-width: 2px;
+     border-radius: 10px;
+     border-color: black;
+     font: bold 14px;
+     min-width: 10em;
+     padding: 6px;
+ }
+ QPushButton:pressed {
+     background-color: rgb(0, 255, 238);
+     border-style: inset;
+ }</string>
+       </property>
        <property name="text">
         <string>Справка</string>
        </property>
@@ -50,6 +114,22 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_5">
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+     background-color:pink;
+     border-style: outset;
+     border-width: 2px;
+     border-radius: 10px;
+     border-color: black;
+     font: bold 14px;
+     min-width: 10em;
+     padding: 6px;
+ }
+ QPushButton:pressed {
+     background-color: rgb(0, 255, 238);
+     border-style: inset;
+ }</string>
+       </property>
        <property name="text">
         <string>Выход</string>
        </property>

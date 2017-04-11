@@ -63,6 +63,8 @@ vairiety::vairiety(QWidget *parent) :
 
     // ---------------------------------------------------------------------- //
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
+    this->setWindowTitle("Вариация заданий");
     ui->tableWidget->setColumnCount(variety.count());
     for (int i=0;i<variety.count();i++)
     {
@@ -80,7 +82,7 @@ void vairiety::chartBuild(QList <double> variety, QList <double> posPrec)
     QChart *chart = new QChart();
     QLineSeries *series = new QLineSeries();
     chart->addSeries(series);
-    series->setName("Tasks variety");
+    series->setName("Вариация заданий");
     for (int i=0;i<variety.count();i++)
     {
            series->append(posPrec.at(i),variety.at(i));
@@ -88,13 +90,13 @@ void vairiety::chartBuild(QList <double> variety, QList <double> posPrec)
     }
     QValueAxis *axisX = new QValueAxis;
     axisX->setTickCount(0.1);
-    axisX->setTitleText("Dolya vernyh"); // RENAME ME!!!
+    axisX->setTitleText("Доля верных ответов"); // RENAME ME!!!
     axisX->setMin(0.0);
     axisX->setMax(1.0);
     chart->addAxis(axisX, Qt::AlignBottom);
 
     QValueAxis *axisY = new QValueAxis;
-    axisY->setTitleText("Variety"); // RENAME ME!!!
+    axisY->setTitleText("Коэффициант вариации"); // RENAME ME!!!
     axisY->setTickCount(0.1);
     axisY->setMin(0.0);
     axisY->setMax(0.26);

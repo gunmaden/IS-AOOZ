@@ -16,7 +16,10 @@ Analiz::Analiz(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Analiz)
 {
+
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
+    this->setWindowTitle("Матрица результатов тестирования");
     QString s = QString("SELECT * from \"Test\" "
                         " where \"cathedraID\" =  "
                         " (SELECT \"cathedraID\" FROM \"Cathedra\" WHERE \"cathedraFIO\" ~ '%1') ").arg(FIO);
@@ -85,6 +88,10 @@ void Analiz::on_comboBox_currentIndexChanged(int index)
             QTableWidgetItem *it = new QTableWidgetItem();
             it->setText(QString("%1").arg(marks.at(row).at(col)));
             ui->tableWidget->setItem(row,col, it);
+
+            if (marks.at(row).at(col) <40)
+            ui->tableWidget->item(row,col)->setBackgroundColor(Qt::gray);
+            else ui->tableWidget->item(row,col)->setBackground(Qt::green);
         }
     }
     }

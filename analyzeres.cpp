@@ -220,14 +220,13 @@ AnalyzeRes::AnalyzeRes(QWidget *parent) :
 
     // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ //
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
+    this->setWindowTitle("Результаты анализа теста");
     ui->tableWidget->setRowCount(trueMatrix.count());
     ui->tableWidget->setColumnCount(NS);
     ui->tableWidget->setVerticalHeaderLabels(trueTaskIds);
-    ui->tableWidget_2->setRowCount(trueMatrix.count());
-    ui->tableWidget_3->setColumnCount(NS);
     ui->tableWidget->setHorizontalHeaderLabels(trueQuestionIds);
-    ui->tableWidget_2->setVerticalHeaderLabels(trueTaskIds);
-    ui->tableWidget_3->setHorizontalHeaderLabels(trueQuestionIds);
+
     for( int row=0; row<trueMatrix.count();row++)
     {
         for (int col=0;col<NS;col++)
@@ -235,17 +234,14 @@ AnalyzeRes::AnalyzeRes(QWidget *parent) :
             QTableWidgetItem *it = new QTableWidgetItem();
             it->setText(QString("%1").arg(trueMatrix.at(row).at(col)));
             ui->tableWidget->setItem(row,col, it);
+            if (trueMatrix.at(row).at(col) <40)
+            ui->tableWidget->item(row,col)->setBackgroundColor(Qt::gray);
+            else ui->tableWidget->item(row,col)->setBackground(Qt::green);
         }
-        QTableWidgetItem *item = new QTableWidgetItem();
-        item->setText(QString("%1").arg(sumsRows.at(row)));
-        ui->tableWidget_2->setItem(row,0,item);
+
     }
 
-    for (int col=0;col<NS; col++){
-            QTableWidgetItem *item = new QTableWidgetItem();
-            item->setText(QString("%1").arg(sumsColumns.at(col)));
-            ui->tableWidget_3->setItem(0,col,item);
-    }
+
 }
 
 AnalyzeRes::~AnalyzeRes()

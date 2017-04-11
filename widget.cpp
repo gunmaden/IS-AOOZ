@@ -74,7 +74,6 @@ void Widget::on_pushButton_clicked()
                 else if (login == log && parol == ps && ut =="2")
                 {
                     Admin *w2 = new Admin();
-                     w2->setWindowTitle("Окно работы Админа");
                      w2->show();
                      close();
 
@@ -82,7 +81,6 @@ void Widget::on_pushButton_clicked()
                 else if (login == log && parol == ps && ut =="3")
                 {
                     ZavCath *zc = new ZavCath();
-                    zc->setWindowTitle("Окно работы зав. кафедрой");
                     zc->show();
                     close();
                 }

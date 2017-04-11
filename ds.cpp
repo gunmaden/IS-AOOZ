@@ -97,6 +97,8 @@ DS::DS(QWidget *parent) :
     // ---------------------------------------------------------------------------- //
 
        ui->setupUi(this);
+       this->setWindowIcon(QIcon(":/favicon.ico"));
+       this->setWindowTitle("Дифференциирующая способность заданий теста");
        ui->tableWidget->setColumnCount(trueQuestionIds.count());
        ui->tableWidget->setHorizontalHeaderLabels(trueQuestionIds);
        qDebug()<<DS;
@@ -120,7 +122,7 @@ void DS::chartBuild(QList<double> DS)
 
         series->setName("DS");
 
-        QBarSet * setList = new QBarSet("Questions");
+        QBarSet * setList = new QBarSet("Задания теста");
         setList->append(DS);
 
         series->append(setList);
@@ -130,7 +132,7 @@ void DS::chartBuild(QList<double> DS)
         chart->setAxisX(axisX, series);
 
         QValueAxis *axisY = new QValueAxis;
-        axisY->setTitleText("Variety"); // RENAME ME!!!
+        axisY->setTitleText("Дифференциируюшая способность"); // RENAME ME!!!
         axisY->setTickCount(0.001);
         axisY->setMin(-1.0);
         axisY->setMax(1.0);

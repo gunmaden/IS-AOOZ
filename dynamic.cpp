@@ -23,6 +23,8 @@ dynamic::dynamic(QWidget *parent) :
     //    QStringList groups;
     //    QStringList disciples;
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
+    this->setWindowTitle("Динамический отчет");
     ui->dateEdit->setMinimumDate(QDate(2010,1,1));
     //    ui->dateEdit->setDate(QDate::currentDate());
     ui->dateEdit->setMaximumDate(QDate::currentDate());

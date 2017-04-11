@@ -7,6 +7,8 @@ ZavCath::ZavCath(QWidget *parent) :
     ui(new Ui::ZavCath)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/favicon.ico"));
+    this->setWindowTitle("Окно работы Заведующего кафедрой");
 }
 
 ZavCath::~ZavCath()
@@ -22,7 +24,7 @@ void ZavCath::on_pushButton_3_clicked()
 void ZavCath::on_pushButton_clicked()
 {
     Analiz *an = new Analiz();
-    // TODO: Написать тайтл
+
     an->show();
     close();
 }
