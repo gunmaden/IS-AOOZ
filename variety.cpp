@@ -115,6 +115,7 @@ void vairiety::chartBuild(QList <double> variety, QList <double> posPrec)
     chart->setTheme(QChart::ChartThemeBlueCerulean);
     chart->setAnimationOptions(QChart::SeriesAnimations);
     chart->setAnimationDuration(1000);
+
     ui->frame->layout()->addWidget(chartView);
 }
 

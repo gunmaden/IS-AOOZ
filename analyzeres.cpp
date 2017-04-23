@@ -368,7 +368,14 @@ AnalyzeRes::AnalyzeRes(QWidget *parent) :
         }
         double validity=findValidity(taskMark100,sessionMark);
         qDebug()<<validity;
-        ui->labelValidity->setText(QString("%1").arg(validity));
+        if (validity<0.11)
+            ui->labelValidity->setText(QString("%1").arg(validity));
+        if (validity>=0.11 && validity<=0.2)
+            ui->labelValidity->setText(QString("%1").arg(validity));
+        if (validity>=0.21 && validity<=0.35)
+            ui->labelValidity->setText(QString("%1").arg(validity));
+        if (validity>0.35)
+            ui->labelValidity->setText(QString("%1").arg(validity));
     }
 
     if (!deletedQuestions.empty()||!deletedTasks.empty())

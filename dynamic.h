@@ -27,6 +27,11 @@ private slots:
 
     void chartBuildByGroups();
     void chartBuildByDisciples();
+
+    void on_dateEdit_dateChanged(const QDate &date);
+
+    void on_dateEdit_2_userDateChanged(const QDate &date);
+
 private:
     Ui::dynamic *ui;
     void setLayouts();

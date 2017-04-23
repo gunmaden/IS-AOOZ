@@ -66,6 +66,8 @@ dynamic::dynamic(QWidget *parent) :
     }
 }
 
+
+
 void dynamic::setLayouts(){
     QVBoxLayout *l1 = new QVBoxLayout();
     ui->groupBox->setLayout(l1);
@@ -146,19 +148,47 @@ void dynamic::chartBuildByDisciples()
                               " WHERE (test.\"testName\" IN ('%1')) "
                               " AND (task.\"taskReceive\" BETWEEN '%2' AND '%3') "
                               " AND (task.\"taskMark100\" !=0 ) ").arg(g).arg(from.toString(Qt::ISODate)).arg(to.toString(Qt::ISODate));
-        qDebug()<<req;
+//        qDebug()<<req;
 
         QLineSeries *series = new QLineSeries();
         series->setName(g);
 
         QSqlQuery q(req);
+        QStringList dates, rawDates;
+        QList <double> results, rawResults;
         while (q.next()) {
-            qDebug()<<q.value(1).toDateTime().toMSecsSinceEpoch()<<q.value(0).toDouble();
-            series->append(q.value(1).toDateTime().toMSecsSinceEpoch(), q.value(0).toDouble());
+            rawDates<<q.value(1).toDate().toString(Qt::ISODate);
+            dates<<q.value(1).toDate().toString(Qt::ISODate);
+            rawResults<<q.value(0).toDouble();
         }
-        qDebug()<<q.lastError();
-        seriesList<<series;
 
+        dates.removeDuplicates();
+        foreach (QString date, dates) {
+            double avg = 0;
+            int counter = 0;
+            for (int i=0;i<rawDates.count();i++)
+            {
+                if (rawDates.at(i)==date)
+                {
+                    avg+=rawResults.at(i);
+                    counter++;
+                }
+            }
+            avg = avg/counter;
+            results<<avg;
+        }
+
+        qDebug()<<dates;
+        qDebug()<<results;
+
+        for (int i=0;i<dates.count();i++)
+        {
+            QDateTime dt;
+            dt = QDateTime::fromString(dates.at(i),"yyyy-MM-dd");
+//            qDebug()<<dt.toString(Qt::ISODate);
+            series->append(dt.toMSecsSinceEpoch(), results.at(i));
+        }
+        seriesList<<series;
     }
     prepareChart(seriesList);
 }
@@ -167,6 +197,12 @@ void dynamic::prepareChart(QList <QLineSeries *> seriesList)
 {
     QChartView *chartView = new QChartView();
     QChart *chart = new QChart();
+
+    foreach (QLineSeries *ls, seriesList)
+    {
+        QLineSeries * series = ls;
+        chart->addSeries(series);
+    }
 
     QDateTimeAxis *axisX = new QDateTimeAxis;
     axisX->setTickCount(10);
@@ -183,20 +219,20 @@ void dynamic::prepareChart(QList <QLineSeries *> seriesList)
     axisY->setMax(100.0);
     chart->addAxis(axisY, Qt::AlignLeft);
 
-    foreach (QLineSeries *ls, seriesList)
-    {
-        QLineSeries * series = ls;
+    foreach (auto series, chart->series()) {
         series->attachAxis(axisX);
         series->attachAxis(axisY);
-        chart->addSeries(series);
     }
     chartView->setRenderHint(QPainter::Antialiasing);
     chart->setTitle("Динамический график");
     chartView->setChart(chart);
-    QMainWindow *w = new QMainWindow();
-    w->setWindowIcon(QIcon(":/favicon.ico"));
-    w->setCentralWidget(chartView);
-    w->show();
+
+    for (int i=0;i<ui->frame->layout()->count();i++)
+    {
+        ui->frame->layout()->removeItem(ui->frame->layout()->itemAt(i));
+    }
+    ui->frame->layout()->addWidget(chartView);
+
 }
 
 
@@ -225,13 +261,41 @@ void dynamic::chartBuildByGroups()
                               " task.\"studGroupName\" IN ('%3') AND task.\"taskMark100\"!=0 ").arg(from.toString(Qt::ISODate)).arg(to.toString(Qt::ISODate)).arg(g);
         QLineSeries *series = new QLineSeries();
         series->setName(g);
-
         QSqlQuery q(req);
+        QStringList dates, rawDates;
+        QList <double> results, rawResults;
         while (q.next()) {
-            series->append(q.value(1).toDateTime().toMSecsSinceEpoch(), q.value(0).toDouble());
+            rawDates<<q.value(1).toDate().toString(Qt::ISODate);
+            dates<<q.value(1).toDate().toString(Qt::ISODate);
+            rawResults<<q.value(0).toDouble();
+        }
+
+        dates.removeDuplicates();
+        foreach (QString date, dates) {
+            double avg = 0;
+            int counter = 0;
+            for (int i=0;i<rawDates.count();i++)
+            {
+                if (rawDates.at(i)==date)
+                {
+                    avg+=rawResults.at(i);
+                    counter++;
+                }
+            }
+            avg = avg/counter;
+            results<<avg;
+        }
+
+        qDebug()<<dates;
+        qDebug()<<results;
+
+        for (int i=0;i<dates.count();i++)
+        {
+            QDateTime dt;
+            dt = QDateTime::fromString(dates.at(i),"yyyy-MM-dd");
+            series->append(dt.toMSecsSinceEpoch(), results.at(i));
         }
         seriesList<<series;
-
     }
     prepareChart(seriesList);
 }
@@ -246,4 +310,67 @@ void dynamic::on_pushButton_clicked()
     Decane *d = new Decane();
     d->show();
     close();
+}
+
+void dynamic::on_dateEdit_dateChanged(const QDate &date)
+{
+    QList<QCheckBox *> disciplesCheckboxes;
+    QList<QCheckBox *> groupsCheckboxes;
+
+    groupsCheckboxes = ui->groupBox->findChildren<QCheckBox *>();
+    disciplesCheckboxes = ui->groupBox_2->findChildren<QCheckBox *>();
+
+    int d=0,g=0;
+    foreach (QCheckBox *box, disciplesCheckboxes) {
+            if (box->checkState()==Qt::Checked)
+            {
+                d++;
+                break;
+            }
+    }
+        foreach (QCheckBox *box, groupsCheckboxes) {
+                if (box->checkState()==Qt::Checked)
+                {
+                    g++;
+                    break;
+                }
+        }
+
+    if (d!=0)
+        chartBuildByDisciples();
+    else if (g!=0) {
+        chartBuildByGroups();
+    }
+}
+
+void dynamic::on_dateEdit_2_userDateChanged(const QDate &date)
+{
+    QList<QCheckBox *> disciplesCheckboxes;
+    QList<QCheckBox *> groupsCheckboxes;
+
+    groupsCheckboxes = ui->groupBox->findChildren<QCheckBox *>();
+    disciplesCheckboxes = ui->groupBox_2->findChildren<QCheckBox *>();
+
+    int d=0,g=0;
+    foreach (QCheckBox *box, disciplesCheckboxes) {
+            if (box->checkState()==Qt::Checked)
+            {
+                d++;
+                break;
+            }
+    }
+    foreach (QCheckBox *box, groupsCheckboxes) {
+                if (box->checkState()==Qt::Checked)
+                {
+                    g++;
+                    break;
+                }
+
+    }
+
+    if (d!=0)
+        chartBuildByDisciples();
+    else if (g!=0) {
+        chartBuildByGroups();
+    }
 }
