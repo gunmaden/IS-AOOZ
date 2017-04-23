@@ -13,7 +13,7 @@ typedef QList < QList <int> > matrix;
 
 matrix trueMatrix;
 QStringList trueTaskIds, trueQuestionIds;
-QList <int> sumsColumns, sumsRows, sumsFalseColumns, sumsFalseRows;
+QList <int> sumsColumns, sumsRows;
 QList <QPair <QString, int> > idsMap;
 QList <QPair <int, int> > columnsMap, rowsMap;
 QMap <int, int> sizes;
@@ -62,7 +62,7 @@ int neededSize(QMap<int,int> map)
 double findSum(QList<double> doubleList){
     double result=0;
     foreach (double val, doubleList) {
-       result+=val;
+        result+=val;
     }
     return result;
 }
@@ -70,7 +70,7 @@ double findSum(QList<double> doubleList){
 int findSum(QList<int> intList){
     int result=0;
     foreach (int val, intList) {
-       result+=val;
+        result+=val;
     }
     return result;
 }
@@ -172,22 +172,6 @@ double findValidity(QList <int> taskMark100, QList <int> sessionMark){
     double avgSessionRes = avgFromIntList(sessionMark, -1);
     double devSessionRes = standartDeviation(sessionMark,avgSessionRes);
     double devTaskMark = standartDeviation(taskMark100,avgTaskMark); // отклонения
-    QList <int> mult = multiplyArrays(taskMark100, sessionMark);
-    QList<double> l;
-    l<<findSum(mult)<<avgTaskMark<<avgSessionRes<<devSessionRes<<devTaskMark;
-    out(l);
-//    return findSum(
-//                multiplyArrays(
-//                    diffWAvg(taskMark100,avgTaskMark),diffWAvg(sessionMark,avgSessionRes)
-//                    )
-//                )/(taskMark100.count()-1)
-//            ;
-
-    qDebug()<<findSum(
-                  multiplyArrays(
-                      diffWAvg(taskMark100,avgTaskMark),diffWAvg(sessionMark,avgSessionRes)
-                      )
-                  );
     return findSum(
                 multiplyArrays(
                     diffWAvg(taskMark100,avgTaskMark),diffWAvg(sessionMark,avgSessionRes)
@@ -202,7 +186,6 @@ AnalyzeRes::AnalyzeRes(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AnalyzeRes)
 {
-//    qDebug()<<marks;
     sizes.clear();
     foreach (QList <int> row, marks) {
         if (!sizes.contains(row.size()))
@@ -233,6 +216,7 @@ AnalyzeRes::AnalyzeRes(QWidget *parent) :
 
     sumsColumns.clear();
     sumsRows.clear();
+    QList<int> indexR, indexC;
     for (int column=0 ; column<NS ; column++){
         int sum=0;
         for (int row=0 ; row < taskIds.size() ; row++ )
@@ -240,11 +224,48 @@ AnalyzeRes::AnalyzeRes(QWidget *parent) :
             marks.at(row).at(column)>=40?sum++:false;
         }
         sumsColumns.append(sum);
+        if (sum==0||sum==taskIds.count())
+            indexC<<column;
     }
 
-    foreach (QList <int> l, marks) {
+    for(int i=0;i<marks.count();i++)
+    {
+        QList <int> l = marks.at(i);
         sumsRows.append(count(l));
+        if (count(l)==0||count(l)==NS)
+            indexR<<i;
     }
+
+    QStringList deletedTasks, deletedQuestions;
+
+    foreach (int ind, indexR) {
+        deletedTasks<<QString("%1").arg(taskIds.at(ind));
+    }
+    foreach (int ind, indexC) {
+        deletedQuestions<<QString("%1").arg(ind+1);
+    }
+
+    int counter=0;
+    foreach (int ind, indexR) {
+        marks.removeAt(ind-counter);
+        sumsRows.removeAt(ind-counter);
+        taskIds.removeAt(ind-counter);
+        counter++;
+    }
+
+    counter=0;
+    foreach (int ind, indexC) {
+        for (int i=0;i<marks.count();i++)
+        {
+            QList <int> junk=marks.at(i);
+            junk.removeAt(ind-counter);
+            marks.replace(i,junk);
+        }
+        sumsColumns.removeAt(ind-counter);
+        counter++;
+    }
+    NS -= indexC.count();
+
     columnsMap.clear();
     rowsMap.clear();
     for (int i=0; i < sumsColumns.size(); i++)
@@ -299,22 +320,12 @@ AnalyzeRes::AnalyzeRes(QWidget *parent) :
         sumsColumns<<count(l);
     }
 
+    // ------------------------------- Deleted questions numbering
+
     for (int i=0;i<columnsMap.count();i++){
-         trueQuestionIds.append(QString("%1 (%2)").arg(i+1).arg(columnsMap.at(i).second+1));
+        trueQuestionIds.append(QString("%1 (%2)").arg(i+1).arg(columnsMap.at(i).second+1));
     }
 
-    QStringList deletedTasks, deletedQuestions;
-    for (int col=0;col<NS;col++)
-    {
-        int sum=0;
-        for (int row=0; row<trueMatrix.count(); row++) {
-            sum+=trueMatrix.at(row).at(col);
-            if (findSum(trueMatrix.at(row))==0||findSum(trueMatrix.at(row))==trueMatrix.at(row).count()*100)
-                deletedTasks<<trueTaskIds.at(row);
-        }
-        if (sum==0||sum==trueMatrix.count()*100)
-            deletedQuestions<<QString("%1").arg(columnsMap.at(col).second+1);
-    }
 
     // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ //
     ui->setupUi(this);

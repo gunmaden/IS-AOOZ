@@ -37,6 +37,9 @@
        <property name="text">
         <string>Проанализировать</string>
        </property>
+       <property name="shortcut">
+        <string>Enter</string>
+       </property>
       </widget>
      </item>
      <item>

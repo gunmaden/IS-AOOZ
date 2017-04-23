@@ -39,6 +39,8 @@ vairiety::vairiety(QWidget *parent) :
 
     QList <double> precPosColumns, precNegColumns; // Доля верных/неверных ответов
 
+    qDebug()<<trueMatrix.count();
+    qDebug()<<trueMatrix.at(0).count();
     foreach (int i, sumsColumns) {
         precPosColumns<<double(i)/double(trueMatrix.count());
         precNegColumns<<double(trueMatrix.count()-i)/double(trueMatrix.count());
@@ -73,6 +75,7 @@ vairiety::vairiety(QWidget *parent) :
         ui->tableWidget->setItem(0,i, it);
     }
     ui->tableWidget->horizontalHeader()->hide();
+    qDebug()<<variety<<precPosColumns;
     chartBuild(variety, precPosColumns);
 }
 
