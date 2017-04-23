@@ -5,6 +5,7 @@
 typedef QList < QList <int> > matrix;
 extern matrix marks;
 extern QStringList taskIds;
+extern QString testId;
 namespace Ui {
 class AnalyzeRes;
 }

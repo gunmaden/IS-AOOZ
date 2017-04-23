@@ -1,6 +1,8 @@
 #include "analyzeres.h"
 #include "ui_analyzeres.h"
+#include <QMessageBox>
 #include <QtMath>
+#include <QSqlQuery>
 #include <QDebug>
 #include "analiz.h"
 #include "ds.h"
@@ -65,6 +67,14 @@ double findSum(QList<double> doubleList){
     return result;
 }
 
+int findSum(QList<int> intList){
+    int result=0;
+    foreach (int val, intList) {
+       result+=val;
+    }
+    return result;
+}
+
 double avgFromIntList (QList <int> intList, int cond=1) {
     double result=0.0;
     int counter=0;
@@ -111,6 +121,81 @@ QList <double> differentiateProbability(QList<double> first, QList<double> secon
     }
     return result;
 }
+
+double standartDeviation(QList <int> data, double avg){
+    double sum = 0;
+    int count = data.count();
+    foreach (int item, data) {
+        sum+=pow(item-avg,2);
+    }
+    return sqrt(double(sum/(count-1)));
+}
+
+QList <int> multiplyArrays(QList <int> array1, QList <int> array2){
+    QList <int> res;
+    for(int i=0;i<array1.count();i++)
+    {
+        res<<array1.at(i)*array2.at(i);
+    }
+    return res;
+}
+
+QList <double> multiplyArrays(QList <double> array1, QList <double> array2){
+    QList <double> res;
+    for(int i=0;i<array1.count();i++)
+    {
+        res<<array1.at(i)*array2.at(i);
+    }
+    return res;
+}
+
+void out(auto L){
+    qDebug()<<"===================================";
+    foreach (auto i, L) {
+        qDebug()<<"///  "<<i;
+    }
+    qDebug()<<"===================================";
+}
+
+QList <double> diffWAvg(QList <int> intList, double avg)
+{
+    QList <double> res;
+    foreach (int it, intList) {
+        res<<it-avg;
+    }
+    return res;
+}
+
+double findValidity(QList <int> taskMark100, QList <int> sessionMark){
+
+    double avgTaskMark = avgFromIntList(taskMark100, -1);
+    double avgSessionRes = avgFromIntList(sessionMark, -1);
+    double devSessionRes = standartDeviation(sessionMark,avgSessionRes);
+    double devTaskMark = standartDeviation(taskMark100,avgTaskMark); // отклонения
+    QList <int> mult = multiplyArrays(taskMark100, sessionMark);
+    QList<double> l;
+    l<<findSum(mult)<<avgTaskMark<<avgSessionRes<<devSessionRes<<devTaskMark;
+    out(l);
+//    return findSum(
+//                multiplyArrays(
+//                    diffWAvg(taskMark100,avgTaskMark),diffWAvg(sessionMark,avgSessionRes)
+//                    )
+//                )/(taskMark100.count()-1)
+//            ;
+
+    qDebug()<<findSum(
+                  multiplyArrays(
+                      diffWAvg(taskMark100,avgTaskMark),diffWAvg(sessionMark,avgSessionRes)
+                      )
+                  );
+    return findSum(
+                multiplyArrays(
+                    diffWAvg(taskMark100,avgTaskMark),diffWAvg(sessionMark,avgSessionRes)
+                    )
+                )/(taskMark100.count()*sqrt(pow(devTaskMark,2)*pow(devSessionRes,2)))
+            ;
+}
+
 
 
 AnalyzeRes::AnalyzeRes(QWidget *parent) :
@@ -218,6 +303,19 @@ AnalyzeRes::AnalyzeRes(QWidget *parent) :
          trueQuestionIds.append(QString("%1 (%2)").arg(i+1).arg(columnsMap.at(i).second+1));
     }
 
+    QStringList deletedTasks, deletedQuestions;
+    for (int col=0;col<NS;col++)
+    {
+        int sum=0;
+        for (int row=0; row<trueMatrix.count(); row++) {
+            sum+=trueMatrix.at(row).at(col);
+            if (findSum(trueMatrix.at(row))==0||findSum(trueMatrix.at(row))==trueMatrix.at(row).count()*100)
+                deletedTasks<<trueTaskIds.at(row);
+        }
+        if (sum==0||sum==trueMatrix.count()*100)
+            deletedQuestions<<QString("%1").arg(columnsMap.at(col).second+1);
+    }
+
     // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ //
     ui->setupUi(this);
     this->setWindowIcon(QIcon(":/favicon.ico"));
@@ -233,15 +331,38 @@ AnalyzeRes::AnalyzeRes(QWidget *parent) :
         {
             QTableWidgetItem *it = new QTableWidgetItem();
             it->setText(QString("%1").arg(trueMatrix.at(row).at(col)));
-            ui->tableWidget->setItem(row,col, it);
             if (trueMatrix.at(row).at(col) <40)
-            ui->tableWidget->item(row,col)->setBackgroundColor(Qt::gray);
-            else ui->tableWidget->item(row,col)->setBackground(Qt::green);
-        }
+                it->setBackgroundColor(Qt::gray);
+            else it->setBackground(Qt::green);
 
+            ui->tableWidget->setItem(row,col, it);
+        }
     }
 
 
+    QSqlQuery q(QString (" SELECT DISTINCT \"table\".\"taskID\", cast(avg(\"t\".\"taskMark100\") as INTEGER ) as \"taskMark100\", \"sr\".\"Mark\" "
+                         " FROM (SELECT * FROM \"TaskContent\" ORDER BY \"taskID\", \"taskContentNum\" ) as \"table\" "
+                         " JOIN \"Task\" as \"t\" on \"table\".\"taskID\" = \"t\".\"taskID\" "
+                         " JOIN \"SessionRes\" as \"sr\" on \"sr\".\"StudId\" = \"t\".\"studID\" "
+                         " WHERE \"table\".\"taskID\" in (SELECT \"taskID\" FROM \"Task\" where \"testID\"=%1) "
+                         " GROUP BY \"table\".\"taskID\", \"sr\".\"Mark\" "
+                         " ORDER BY \"table\".\"taskID\" ").arg(testId));
+    QList <int> taskMark100, sessionMark;
+    if (q.size()==0)
+        ui->labelValidity->setText("Невозможно определить валидность теста, т.к. отсутствуют результаты прохождения сессии");
+    else {
+        while (q.next()) {
+            taskMark100<<q.value(1).toInt();
+            sessionMark<<q.value(2).toInt();
+        }
+        double validity=findValidity(taskMark100,sessionMark);
+        qDebug()<<validity;
+        ui->labelValidity->setText(QString("%1").arg(validity));
+    }
+
+    if (!deletedQuestions.empty()||!deletedTasks.empty())
+        QMessageBox::information(this, "Внимание", QString("Из расчета убраны вопросы: %1 \n Из расчета убраны результаты теста: %2")
+                                 .arg(deletedQuestions.join(", ")).arg(deletedTasks.join(", ")));
 }
 
 AnalyzeRes::~AnalyzeRes()

@@ -106,11 +106,10 @@ DS::DS(QWidget *parent) :
        {
            QTableWidgetItem *it = new QTableWidgetItem();
            it->setText(QString("%1").arg(DS.at(i)));
+           if (DS.at(i)<0) it->setBackgroundColor(Qt::red);
+           else if(DS.at(i)<0.3) it->setBackgroundColor(Qt::yellow);
+           else if (DS.at(i)>=0.3) it->setBackgroundColor(Qt::green);
            ui->tableWidget->setItem(0,i, it);
-           if (DS.at(i)<0) ui->tableWidget->item(0,i)->setBackgroundColor(Qt::red);
-           else if(DS.at(i)<0.3) ui->tableWidget->item(0,i)->setBackgroundColor(Qt::yellow);
-           else if (DS.at(i)>=0.3) ui->tableWidget->item(0,i)->setBackgroundColor(Qt::green);
-//           ui->tableWidget->itemAt(i,0)->setText(DS.at(i));
        }
        chartBuild(DS);
 }

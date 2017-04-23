@@ -2,7 +2,7 @@
 #define ANALIZ_H
 
 #include <QWidget>
-extern QString FIO,IDD;
+extern QString FIO,IDD, testId;
 
 namespace Ui {
 class Analiz;

@@ -11,6 +11,7 @@ typedef QList < QList <int> > matrix;
 QStringList testNames, testIds;
 matrix marks;
 QStringList taskIds;
+QString testId;
 
 Analiz::Analiz(QWidget *parent) :
     QWidget(parent),
@@ -49,11 +50,12 @@ void Analiz::on_pushButton_2_clicked()
 void Analiz::on_comboBox_currentIndexChanged(int index)
 {
     qDebug()<<testIds.at(index);
+    testId = testIds.at(index);
     QSqlQuery q3(QString(" SELECT DISTINCT \"taskID\", string_agg( to_char(\"taskContentNum\",'999'), ',' ) as \"tasks\", string_agg( to_char(\"taskContentMark\",'999'), ',' ) as \"taskMarks\" "
                          " FROM (SELECT * FROM \"TaskContent\" ORDER BY \"taskID\", \"taskContentNum\" ) as \"table\" "
                          " WHERE \"taskID\" in (SELECT \"taskID\" FROM \"Task\" where \"testID\"=%1) "
                          " GROUP BY \"taskID\" "
-                         " ORDER BY \"taskID\" ").arg(testIds.at(index)));
+                         " ORDER BY \"taskID\" ").arg(testId));
 
     QStringList taskNums;
     QStringList taskResults;
@@ -87,11 +89,10 @@ void Analiz::on_comboBox_currentIndexChanged(int index)
         {
             QTableWidgetItem *it = new QTableWidgetItem();
             it->setText(QString("%1").arg(marks.at(row).at(col)));
-            ui->tableWidget->setItem(row,col, it);
-
             if (marks.at(row).at(col) <40)
-            ui->tableWidget->item(row,col)->setBackgroundColor(Qt::gray);
-            else ui->tableWidget->item(row,col)->setBackground(Qt::green);
+            it->setBackgroundColor(Qt::gray);
+            else it->setBackgroundColor(Qt::green);
+            ui->tableWidget->setItem(row,col, it);
         }
     }
     }

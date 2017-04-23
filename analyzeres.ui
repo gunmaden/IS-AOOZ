@@ -39,6 +39,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="labelValidity">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QTableWidget" name="tableWidget">
          <property name="styleSheet">
           <string notr="true"/>
