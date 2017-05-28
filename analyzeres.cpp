@@ -180,7 +180,20 @@ double findValidity(QList <int> taskMark100, QList <int> sessionMark){
             ;
 }
 
-
+double findReliability(int questionsCount, QList <int> trueCount)
+{
+    double avgTrueCount = avgFromIntList(trueCount);
+    double devTrueCount = standartDeviation(trueCount, avgTrueCount);
+    QList <double> P,Q;
+    foreach (int val, trueCount) {
+        double pj = val/questionsCount;
+        P.append(pj);
+        Q.append(1-pj);
+    }
+    QList <double> mult = multiplyArrays(P,Q);
+    double sum = findSum(mult);
+    return (questionsCount-sum)/((questionsCount-1)*devTrueCount);
+}
 
 AnalyzeRes::AnalyzeRes(QWidget *parent) :
     QWidget(parent),
@@ -377,6 +390,14 @@ AnalyzeRes::AnalyzeRes(QWidget *parent) :
         if (validity>0.35)
             ui->labelValidity->setText(QString("Значение коэффициента: %1 . Этот тест с очень хорошей валидностью").arg(validity));
     }
+    double reliability = findReliability(NS,sumsRows);
+    qDebug()<<reliability;
+    if (reliability>=0.8)
+        ui->label_2->setText(QString("Надежность теста составляет: %1 , что говорит о высокой надежности теста").arg(reliability));
+    if (reliability<0.8 && reliability>=0.7)
+        ui->label_2->setText(QString("Надежность теста составляет: %1 , что говорит о хоршей надежности теста").arg(reliability));
+    if (reliability<0.7)
+        ui->label_2->setText(QString("Надежность теста составляет: %1 , данный тест не рекомендуется использовать").arg(reliability));
 
     if (!deletedQuestions.empty()||!deletedTasks.empty())
         QMessageBox::information(this, "Внимание", QString("Из расчета убраны вопросы: %1 \n Из расчета убраны результаты теста: %2")

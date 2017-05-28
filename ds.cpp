@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QLineSeries>
 #include <QValueAxis>
+#include <QMessageBox>
 #include <QtMath>
 
 double findSumDS(QList<double> doubleList){
@@ -83,17 +84,6 @@ DS::DS(QWidget *parent) :
     const double avgMarksByTest=avgFromIntListDS(sumsRows);;
     QList <double> DS  = differentiateProbabilityDS(firstPartDS(avgMarksByQuestion, avgMarksByTest, findSigmaDS(sumsRows,avgMarksByTest)),secondPartDS(sumsColumns,sumsRows.count()));
 
-    // BACKUP
-
-//    const double avgMarksByTest=avgFromIntListDS(sumsRows);;
-//    qDebug()<<avgMarksByQuestion; // Средние значения по столбцам с верным ответом
-//    qDebug()<<avgMarksByTest; // Среднее значение по всем результатам теста
-//    qDebug()<<findSigmaDS(sumsRows,avgMarksByTest); // Сигма
-//    double sigma = findSigmaDS(sumsRows,avgMarksByTest);
-//    qDebug()<<firstPartDS(avgMarksByQuestion, avgMarksByTest, sigma );
-//    qDebug()<<secondPartDS(sumsColumns,sumsRows.count());
-//    qDebug()<<differentiateProbabilityDS(firstPartDS(avgMarksByQuestion, avgMarksByTest, sigma ),secondPartDS(sumsColumns,sumsRows.count()));
-
     // ---------------------------------------------------------------------------- //
 
        ui->setupUi(this);
@@ -102,15 +92,45 @@ DS::DS(QWidget *parent) :
        ui->tableWidget->setColumnCount(trueQuestionIds.count());
        ui->tableWidget->setHorizontalHeaderLabels(trueQuestionIds);
        qDebug()<<DS;
+       double countRed = 0;
+       double countYellow = 0;
+       QStringList indexes;
+       QStringList indYel;
        for (int i=0; i<trueQuestionIds.count(); i++)
        {
            QTableWidgetItem *it = new QTableWidgetItem();
            it->setText(QString("%1").arg(DS.at(i)));
-           if (DS.at(i)<0) it->setBackgroundColor(Qt::red);
-           else if(DS.at(i)<0.3) it->setBackgroundColor(Qt::yellow);
+
+           if (DS.at(i)<0) {
+               it->setBackgroundColor(Qt::red);
+               countRed++;
+               indexes.append(QString("%1").arg(i+1));
+           }
+           else if(DS.at(i)<0.3) {
+               it->setBackgroundColor(Qt::yellow);
+               countYellow ++;
+               indYel.append(QString("%1").arg(i+1));
+           }
            else if (DS.at(i)>=0.3) it->setBackgroundColor(Qt::green);
            ui->tableWidget->setItem(0,i, it);
        }
+       if (indexes.count()==0)
+       ui->label->setText(QString("Вопросы дифференцирующая способность которых больше <font color=green><b>0.3</b></font> могут быть использованы в тесте.<br>"
+                                  "Количество вопросов рекомендованных к редактированию составляет <b>%1</b> из <b>%2</b>.<br>"
+                                  "Доля рекомендованных к редактированию вопросов составила <b>%3</b>.<br>"
+                                  "Для повышения качества оценки знаний студентов рекомендованы к редактированию вопросы № <font color=orange><b>%4</b></font>.").arg(countRed+countYellow).arg(trueQuestionIds.count()).arg((countRed+countYellow)/trueQuestionIds.count()).arg(indYel.join(", ")));
+      else if (indYel.count()==0)
+           ui->label->setText(QString("Вопросы дифференцирующая способность которых больше <font color=green><b>0.3</b></font> могут быть использованы в тесте.<br>"
+                                      "Количество вопросов рекомендованных к редактированию составляет <b>%1</b> из <b>%2</b>.<br>"
+                                      "Доля рекомендованных к редактированию вопросов составила <b>%3</b>.<br>"
+                                      "Для повышения качества оценки знаний студентов обязательному редактированию подлежат вопросы № <font color=red><b>%4</b></font>.<br>").arg(countRed+countYellow).arg(trueQuestionIds.count()).arg((countRed+countYellow)/trueQuestionIds.count()).arg(indexes.join(", ")));
+      else
+           ui->label->setText(QString("Вопросы дифференцирующая способность которых больше <font color=green><b>0.3</b></font> могут быть использованы в тесте.<br>"
+                                      "Количество вопросов рекомендованных к редактированию составляет <b>%1</b> из <b>%2</b>.<br>"
+                                      "Доля рекомендованных к редактированию вопросов составила <b>%3</b>.<br>"
+                                      "Для повышения качества оценки знаний студентов обязательному редактированию подлежат вопросы № <font color=red><b>%4</b></font>.<br>"
+                                      "Рекомендованы к редактированию вопросы № <font color=orange><b>%5</b></font>.").arg(countRed+countYellow).arg(trueQuestionIds.count()).arg((countRed+countYellow)/trueQuestionIds.count()).arg(indexes.join(", ")).arg(indYel.join(", ")));
+
        chartBuild(DS);
 }
 
