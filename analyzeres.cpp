@@ -369,13 +369,13 @@ AnalyzeRes::AnalyzeRes(QWidget *parent) :
         double validity=findValidity(taskMark100,sessionMark);
         qDebug()<<validity;
         if (validity<0.11)
-            ui->labelValidity->setText(QString("%1").arg(validity));
+            ui->labelValidity->setText(QString("Значение коэффициента: %1 . Этот тест не следует использовать").arg(validity));
         if (validity>=0.11 && validity<=0.2)
-            ui->labelValidity->setText(QString("%1").arg(validity));
+            ui->labelValidity->setText(QString("Значение коэффициента: %1 . Этот тест можно использовать в зависимости от обстоятельств").arg(validity));
         if (validity>=0.21 && validity<=0.35)
-            ui->labelValidity->setText(QString("%1").arg(validity));
+            ui->labelValidity->setText(QString("Значение коэффициента: %1 . Этот тест можно использовать").arg(validity));
         if (validity>0.35)
-            ui->labelValidity->setText(QString("%1").arg(validity));
+            ui->labelValidity->setText(QString("Значение коэффициента: %1 . Этот тест с очень хорошей валидностью").arg(validity));
     }
 
     if (!deletedQuestions.empty()||!deletedTasks.empty())

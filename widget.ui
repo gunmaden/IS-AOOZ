@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; font-style:italic; text-decoration: underline;&quot;&gt;Информационная система анализа и оптимизации фонда оцнивания знаний&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; font-style:italic; text-decoration: underline;&quot;&gt;Информационная система анализа фонда оцнивания знаний&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
@@ -55,7 +55,7 @@
         <item>
          <widget class="QLineEdit" name="lineEdit">
           <property name="text">
-           <string>3</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -101,7 +101,10 @@
         <item>
          <widget class="QLineEdit" name="lineEdit_2">
           <property name="text">
-           <string>3</string>
+           <string/>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
           </property>
          </widget>
         </item>
