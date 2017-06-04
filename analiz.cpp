@@ -93,6 +93,7 @@ void Analiz::on_comboBox_currentIndexChanged(int index)
             it->setBackgroundColor(Qt::gray);
             else it->setBackgroundColor(Qt::green);
             ui->tableWidget->setItem(row,col, it);
+
         }
     }
     }

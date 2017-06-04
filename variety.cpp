@@ -66,7 +66,7 @@ vairiety::vairiety(QWidget *parent) :
     // ---------------------------------------------------------------------- //
     ui->setupUi(this);
     this->setWindowIcon(QIcon(":/favicon.ico"));
-    this->setWindowTitle("Вариация заданий");
+    this->setWindowTitle("Валидность заданий");
     ui->tableWidget->setColumnCount(variety.count());
     for (int i=0;i<variety.count();i++)
     {
@@ -85,7 +85,7 @@ void vairiety::chartBuild(QList <double> variety, QList <double> posPrec)
     QChart *chart = new QChart();
     QLineSeries *series = new QLineSeries();
     chart->addSeries(series);
-    series->setName("Вариация заданий");
+    series->setName("Валидность заданий");
     for (int i=0;i<variety.count();i++)
     {
            series->append(posPrec.at(i),variety.at(i));
@@ -93,7 +93,7 @@ void vairiety::chartBuild(QList <double> variety, QList <double> posPrec)
     }
     QValueAxis *axisX = new QValueAxis;
     axisX->setTickCount(0.1);
-    axisX->setTitleText("Доля верных ответов"); // RENAME ME!!!
+    axisX->setTitleText("Трудность заданий"); // RENAME ME!!!
     axisX->setMin(0.0);
     axisX->setMax(1.0);
     chart->addAxis(axisX, Qt::AlignBottom);
@@ -110,7 +110,7 @@ void vairiety::chartBuild(QList <double> variety, QList <double> posPrec)
 
 
     chartView->setRenderHint(QPainter::Antialiasing);
-    chart->setTitle("Variety");
+    chart->setTitle("Валидность заданий");
     chartView->setChart(chart);
     chart->setTheme(QChart::ChartThemeBlueCerulean);
     chart->setAnimationOptions(QChart::SeriesAnimations);

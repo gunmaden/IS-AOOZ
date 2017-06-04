@@ -131,6 +131,16 @@ double standartDeviation(QList <int> data, double avg){
     return sqrt(double(sum/(count-1)));
 }
 
+double nestandartDeviation(QList <int> data, double avg){
+    double sum = 0;
+    int count = data.count();
+    foreach (int item, data) {
+        sum+=pow(item-avg,2);
+    }
+    return sum/(count-1);
+
+}
+
 QList <int> multiplyArrays(QList <int> array1, QList <int> array2){
     QList <int> res;
     for(int i=0;i<array1.count();i++)
@@ -172,27 +182,50 @@ double findValidity(QList <int> taskMark100, QList <int> sessionMark){
     double avgSessionRes = avgFromIntList(sessionMark, -1);
     double devSessionRes = standartDeviation(sessionMark,avgSessionRes);
     double devTaskMark = standartDeviation(taskMark100,avgTaskMark); // отклонения
+
+    qDebug()<<"СрзначПоТесту"<<avgTaskMark;
+     qDebug()<<"СрЗначПоСессии"<<avgSessionRes;
+      qDebug()<<"ОтклонениеСеси"<<devSessionRes;
+      qDebug()<<"ОтклонениеТеста"<<devTaskMark;
+      qDebug()<<"Колво испыт"<<sessionMark.count();
+
+      double summ1 = findSum(multiplyArrays(taskMark100,sessionMark))/sessionMark.count();
+      double levaya = (summ1-(avgTaskMark*avgTaskMark))/(devSessionRes*devTaskMark);
+      double valL = levaya*((sessionMark.count())/(sessionMark.count()-1));
+      qDebug()<<"Валидность!"<<valL;
     return findSum(
                 multiplyArrays(
                     diffWAvg(taskMark100,avgTaskMark),diffWAvg(sessionMark,avgSessionRes)
                     )
-                )/(taskMark100.count()*sqrt(pow(devTaskMark,2)*pow(devSessionRes,2)))
-            ;
+                )/(taskMark100.count()*sqrt(pow(devTaskMark,2)*pow(devSessionRes,2)));
+
+
+
+
 }
 
-double findReliability(int questionsCount, QList <int> trueCount)
+
+double findReliability(int questionsCount, QList <int> trueCount, QList <int> countscol)
 {
     double avgTrueCount = avgFromIntList(trueCount);
-    double devTrueCount = standartDeviation(trueCount, avgTrueCount);
+    double devTrueCount = nestandartDeviation(trueCount, avgTrueCount);
     QList <double> P,Q;
-    foreach (int val, trueCount) {
-        double pj = val/questionsCount;
+    foreach (double val, countscol) {
+        double pj = val/trueCount.count();
         P.append(pj);
         Q.append(1-pj);
     }
+
     QList <double> mult = multiplyArrays(P,Q);
     double sum = findSum(mult);
-    return (questionsCount-sum)/((questionsCount-1)*devTrueCount);
+
+    qDebug()<<"QUScount"<<questionsCount;
+    qDebug()<<"trueCount"<<sum;
+    qDebug()<<"Countscol"<<devTrueCount;
+
+
+    return (questionsCount/(questionsCount-1))*(1-(sum/devTrueCount));
+
 }
 
 AnalyzeRes::AnalyzeRes(QWidget *parent) :
@@ -367,7 +400,7 @@ AnalyzeRes::AnalyzeRes(QWidget *parent) :
     QSqlQuery q(QString (" SELECT DISTINCT \"table\".\"taskID\", cast(avg(\"t\".\"taskMark100\") as INTEGER ) as \"taskMark100\", \"sr\".\"Mark\" "
                          " FROM (SELECT * FROM \"TaskContent\" ORDER BY \"taskID\", \"taskContentNum\" ) as \"table\" "
                          " JOIN \"Task\" as \"t\" on \"table\".\"taskID\" = \"t\".\"taskID\" "
-                         " JOIN \"SessionRes\" as \"sr\" on \"sr\".\"StudId\" = \"t\".\"studID\" "
+                         " JOIN \"SessionRes\" as \"sr\" on \"sr\".\"StudId\" = \"t\".\"studID\" AND \"sr\".\"IdTest\" = \"t\".\"testID\" "
                          " WHERE \"table\".\"taskID\" in (SELECT \"taskID\" FROM \"Task\" where \"testID\"=%1) "
                          " GROUP BY \"table\".\"taskID\", \"sr\".\"Mark\" "
                          " ORDER BY \"table\".\"taskID\" ").arg(testId));
@@ -390,7 +423,7 @@ AnalyzeRes::AnalyzeRes(QWidget *parent) :
         if (validity>0.35)
             ui->labelValidity->setText(QString("Значение коэффициента: %1 . Этот тест с очень хорошей валидностью").arg(validity));
     }
-    double reliability = findReliability(NS,sumsRows);
+    double reliability = findReliability(NS,sumsRows,sumsColumns);
     qDebug()<<reliability;
     if (reliability>=0.8)
         ui->label_2->setText(QString("Надежность теста составляет: %1 , что говорит о высокой надежности теста").arg(reliability));

@@ -1,6 +1,7 @@
 #include "zavcath.h"
 #include "ui_zavcath.h"
 #include "analiz.h"
+#include "widget.h"
 
 ZavCath::ZavCath(QWidget *parent) :
     QWidget(parent),
@@ -18,6 +19,8 @@ ZavCath::~ZavCath()
 
 void ZavCath::on_pushButton_3_clicked()
 {
+    Widget *w = new Widget();
+    w->show();
     close();
 }
 

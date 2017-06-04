@@ -82,7 +82,7 @@
  }</string>
          </property>
          <property name="text">
-          <string>Вариация заданий</string>
+          <string>Валидность заданий</string>
          </property>
         </widget>
        </item>
