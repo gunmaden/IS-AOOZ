@@ -2,6 +2,7 @@
 #include "ui_zavcath.h"
 #include "analiz.h"
 #include "widget.h"
+#include "spravkazavcath.h"
 
 ZavCath::ZavCath(QWidget *parent) :
     QWidget(parent),
@@ -30,4 +31,11 @@ void ZavCath::on_pushButton_clicked()
 
     an->show();
     close();
+}
+
+void ZavCath::on_pushButton_2_clicked()
+{
+  SpravkaZavCath *s = new SpravkaZavCath();
+s->show();
+close();
 }

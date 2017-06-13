@@ -2,7 +2,7 @@
 #include "ui_decane.h"
 #include "dynamic.h"
 #include "klaster.h"
-
+#include "spravkadecane.h"
 Decane::Decane(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Decane)
@@ -34,4 +34,11 @@ void Decane::on_pushButton_2_clicked()
     dynamic *d = new dynamic();
     d->show();
     close();
+}
+
+void Decane::on_pushButton_4_clicked()
+{
+   SpravkaDecane *sdd = SpravkaDecane();
+   sdd->show();
+   close();
 }
