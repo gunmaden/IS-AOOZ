@@ -3,6 +3,7 @@
 #include "analiz.h"
 #include "widget.h"
 #include "spravkazavcath.h"
+#include "svodanalyz.h"
 
 ZavCath::ZavCath(QWidget *parent) :
     QWidget(parent),
@@ -28,8 +29,11 @@ void ZavCath::on_pushButton_3_clicked()
 void ZavCath::on_pushButton_clicked()
 {
     Analiz *an = new Analiz();
-
     an->show();
+
+    SvodAnalyz *svod = new SvodAnalyz();
+    svod->show();
+
     close();
 }
 

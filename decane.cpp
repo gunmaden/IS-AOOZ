@@ -38,7 +38,7 @@ void Decane::on_pushButton_2_clicked()
 
 void Decane::on_pushButton_4_clicked()
 {
-   SpravkaDecane *sdd = SpravkaDecane();
+   SpravkaDecane *sdd = new SpravkaDecane();
    sdd->show();
    close();
 }

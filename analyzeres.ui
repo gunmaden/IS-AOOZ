@@ -40,6 +40,14 @@
        </item>
        <item>
         <widget class="QLabel" name="labelValidity">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <italic>true</italic>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -47,6 +55,14 @@
        </item>
        <item>
         <widget class="QLabel" name="label_2">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <italic>true</italic>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
           <string/>
          </property>

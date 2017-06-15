@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     variety.cpp \
     ds.cpp \
     spravkazavcath.cpp \
-    spravkadecane.cpp
+    spravkadecane.cpp \
+    svodanalyz.cpp
 
 
 HEADERS  += widget.h \
@@ -52,7 +53,8 @@ HEADERS  += widget.h \
     vairiety.h \
     ds.h \
     spravkazavcath.h \
-    spravkadecane.h
+    spravkadecane.h \
+    svodanalyz.h
 
 
 FORMS    += widget.ui \
@@ -72,7 +74,8 @@ FORMS    += widget.ui \
     vairiety.ui \
     ds.ui \
     spravkazavcath.ui \
-    spravkadecane.ui
+    spravkadecane.ui \
+    svodanalyz.ui
 
 RESOURCES += \
     resource.qrc
