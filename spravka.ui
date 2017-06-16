@@ -7,17 +7,23 @@
     <x>0</x>
     <y>0</y>
     <width>697</width>
-    <height>752</height>
+    <height>703</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="2" column="0">
-    <widget class="QPushButton" name="pushButton">
-     <property name="styleSheet">
-      <string notr="true">QPushButton{
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>660</y>
+     <width>186</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
      background-color: pink;
      border-style: outset;
      border-width: 2px;
@@ -31,27 +37,37 @@
      background-color: rgb(0, 255, 238);
      border-style: inset;
  }</string>
-     </property>
-     <property name="text">
-      <string>Назад</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" alignment="Qt::AlignHCenter">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;Справка для пользователя Администратор&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Информационная система анализа фонда оценивания знаний студентов&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;на основе результатов тестирования предназначена &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;для того,чтобы количественно оценить качество тестовых материалов.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;&lt;br/&gt;Роль Администратора заключается в том, чтобы вести справочник пользователей, просматривать локальную БД и&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;инициализировать информацию из БД системы мониторинга &lt;/span&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;учебного процесса АСИ СГТУ.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;1) При выборе пункта меню &amp;quot;Ведение справочника пользователей&amp;quot; открывается таблица с существующими&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;пользователями. Для того чтобы добавить пользователя необходимо нажать кнопку &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;&amp;quot;Добавить пользователя&amp;quot;. При нажатии на эту кнопку, Вам будет предоставлена форма добавления&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;пользователя с полями ввода &amp;quot;ФИО&amp;quot;, &amp;quot;Логин&amp;quot;, &amp;quot;Пароль&amp;quot; и выбор &amp;quot;Должность&amp;quot;. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;При заполнении всех полей, пользователь будет добавлен в БД.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;Аналогично работает функция удаления пользователей. При нажатии на кнопку &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;&amp;quot;Удаление пользователей&amp;quot;, открывается форма с выбором пользователя по ФИО.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;После выбора пользователя необходимо надать кнопку &amp;quot;Удалить&amp;quot; или &amp;quot;Отмена&amp;quot;. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;При нажатии на кнопку &amp;quot;Удалить&amp;quot; система спросит &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;точно ли Вы хотите удалить пользователя с вариантами ответа &amp;quot;Да&amp;quot;, &amp;quot;Нет&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;После удаления пользователя система оповестит об успешности добавления пользователя.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;2) При выборе пункта меню &amp;quot;Просмотр локальной БД&amp;quot; система&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;откроет форму с таблицами БД без возможности изменения&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;и кнопкой &amp;quot;Назад&amp;quot;. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;3) Инициализация информации из БД АСИ СГТУ. Если в БД АСИ СГТУ были внесены изменения, то при &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;нажатии на кнопку &amp;quot;Инициализация информации&amp;quot; информация будет добавлена в локальную БД. &lt;/span&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
-   </item>
-  </layout>
+   </property>
+   <property name="text">
+    <string>Назад</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>9</y>
+     <width>336</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;Справка для пользователя Администратор&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>679</width>
+     <height>651</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Информационная система анализа фонда оценивания знаний студентов&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;на основе результатов тестирования предназначена &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;для того,чтобы количественно оценить качество тестовых материалов.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;&lt;br/&gt;Роль Администратора заключается в том, чтобы вести справочник пользователей, просматривать локальную БД и&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#000000;&quot;&gt;инициализировать информацию из БД системы мониторинга &lt;/span&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;учебного процесса АСИ СГТУ.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;1) При выборе пункта меню &amp;quot;Ведение справочника пользователей&amp;quot; открывается таблица с существующими&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;пользователями. Для того чтобы добавить пользователя необходимо нажать кнопку &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;&amp;quot;Добавить пользователя&amp;quot;. При нажатии на эту кнопку, Вам будет предоставлена форма добавления&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;пользователя с полями ввода &amp;quot;ФИО&amp;quot;, &amp;quot;Логин&amp;quot;, &amp;quot;Пароль&amp;quot; и выбор &amp;quot;Должность&amp;quot;. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;При заполнении всех полей, пользователь будет добавлен в БД.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;Аналогично работает функция удаления пользователей. При нажатии на кнопку &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;&amp;quot;Удаление пользователей&amp;quot;, открывается форма с выбором пользователя по ФИО.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;После выбора пользователя необходимо надать кнопку &amp;quot;Удалить&amp;quot; или &amp;quot;Отмена&amp;quot;. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;При нажатии на кнопку &amp;quot;Удалить&amp;quot; система спросит &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;точно ли Вы хотите удалить пользователя с вариантами ответа &amp;quot;Да&amp;quot;, &amp;quot;Нет&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;После удаления пользователя система оповестит об успешности добавления пользователя.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;2) При выборе пункта меню &amp;quot;Просмотр локальной БД&amp;quot; система&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;откроет форму с таблицами БД без возможности изменения&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;и кнопкой &amp;quot;Назад&amp;quot;. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;3) Инициализация информации из БД АСИ СГТУ. Если в БД АСИ СГТУ были внесены изменения, то при &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Courier New,courier'; color:#000000;&quot;&gt;нажатии на кнопку &amp;quot;Инициализация информации&amp;quot; информация будет добавлена в локальную БД. &lt;/span&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

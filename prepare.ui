@@ -80,7 +80,7 @@
  }</string>
        </property>
        <property name="text">
-        <string>Расчитать</string>
+        <string>Продолжить</string>
        </property>
       </widget>
      </item>
